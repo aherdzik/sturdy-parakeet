@@ -15,6 +15,7 @@ var origin= {x:0, y:0};
 var inputHandler;
 var global_offset_x = 0;
 var global_offset_y = 0;
+var servConnection = new ServerConnection();
 
 var IMAGE_SOURCES = { 
 playerImage: "images/player.png",
