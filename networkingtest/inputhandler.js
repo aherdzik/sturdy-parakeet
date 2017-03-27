@@ -19,16 +19,16 @@ this.player1input= [];
 	this.keydown = [];
 };
 			
-InputHandler.prototype.keyDown= function(key){
-//console.log(key);
-if(!this.keydown[key])
+InputHandler.prototype.keyDown= function(key)
 {
-	if(key==65 || key==87 || key==83 || key==68 || key==81)
+    if(!this.keydown[key])
     {
-		this.player1input.push(new InputTimer(key));
-	}
-}
-this.keydown[key]=true;
+        if(key==65 || key==87 || key==83 || key==68 || key==81)
+        {
+            this.player1input.push(new InputTimer(key));
+        }
+    }
+    this.keydown[key]=true;
 };
 
 InputHandler.prototype.keyUp= function(key)

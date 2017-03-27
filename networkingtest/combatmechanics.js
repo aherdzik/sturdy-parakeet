@@ -13,14 +13,16 @@ var FPS = 60;
 var gamestate = 0;
 var origin= {x:0, y:0};
 var inputHandler;
+var global_x = 0;
+var global_y = 0;
 
 var IMAGE_SOURCES = { 
-playerImage: "images/player.png"
+playerImage: "images/player.png",
+squareImage: "images/square.png"
 };
 
 //GLOBALS
 var ctx;
-var player;
 var gameObjects = new Map();
 images = {};
 var mouse = {};
@@ -44,7 +46,8 @@ function init()
     {  
         inputHandler.keyUp(e.keyCode);
     });
-    gameObjects.set("player", new Player(CANVAS_WIDTH/2,CANVAS_HEIGHT,50,1));
+    gameObjects.set("player", new Player(player_location_x,player_location_y));
+    gameObjects.set("square1", new Square(400,400, 100));
 }//end init
 
 function track_mouse(e)
@@ -65,6 +68,9 @@ function loop(){
 
 function update()
 {
+    global_x = gameObjects.get("player").x;
+    global_y = gameObjects.get("player").y;
+    
     for (var value of gameObjects.values()) 
     {
         value.update();
