@@ -63,25 +63,8 @@ function loop(){
 }
 
 
-function update(){
-	console.log("player.x: " + player.xVel + "player.y: " + player.yVel);
-    
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_LEFT])
-    {
-        player.xVel-=(10); 			
-    }
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_RIGHT])
-    {
-        player.xVel+=(10); 
-    }
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_UP])
-    {
-        player.yVel+=(-10);
-    }
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_DOWN])
-    {
-        player.yVel+=(10);	
-    }
+function update()
+{
     player.update();
 }//END UPDATE
 
