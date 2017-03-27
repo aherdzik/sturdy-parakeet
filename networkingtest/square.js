@@ -7,8 +7,7 @@ function Square(xval,yval, size)
 
 Square.prototype.draw= function()
 {
-    console.log("SQUAREDRAW");
-    ctx.drawImage(images["squareImage"],(this.x-this.size)+player_location_x-global_x,(this.y- this.size)+player_location_y-global_y,this.size*2,this.size*2);
+    ctx.drawImage(images["squareImage"],(this.x-this.size)+global_offset_x,(this.y- this.size)+global_offset_y,this.size*2,this.size*2);
 };
 
 Square.prototype.update = function()

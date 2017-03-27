@@ -13,8 +13,8 @@ var FPS = 60;
 var gamestate = 0;
 var origin= {x:0, y:0};
 var inputHandler;
-var global_x = 0;
-var global_y = 0;
+var global_offset_x = 0;
+var global_offset_y = 0;
 
 var IMAGE_SOURCES = { 
 playerImage: "images/player.png",
@@ -68,8 +68,8 @@ function loop(){
 
 function update()
 {
-    global_x = gameObjects.get("player").x;
-    global_y = gameObjects.get("player").y;
+    global_offset_x = player_location_x- gameObjects.get("player").x;
+    global_offset_y = player_location_y- gameObjects.get("player").y;
     
     for (var value of gameObjects.values()) 
     {
