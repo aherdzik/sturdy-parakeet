@@ -58,7 +58,8 @@ function track_mouse(e)
 
 function onclick(e)
 {
-
+    console.log("test");
+    servConnection.sendMessage("test1");
 }
 
 function loop(){
