@@ -21,7 +21,8 @@ this.player1input= [];
 			
 InputHandler.prototype.keyDown= function(key){
 //console.log(key);
-if(!this.keydown[key]){
+if(!this.keydown[key])
+{
 	if(key==65 || key==87 || key==83 || key==68 || key==81)
     {
 		this.player1input.push(new InputTimer(key));

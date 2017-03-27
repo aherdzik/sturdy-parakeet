@@ -10,7 +10,6 @@ var CANVAS_HEIGHT = 720;
 var player_location_x = CANVAS_WIDTH/2;
 var player_location_y = CANVAS_HEIGHT/2;
 var FPS = 60;
-var player;
 var gamestate = 0;
 var origin= {x:0, y:0};
 var inputHandler;
@@ -22,6 +21,7 @@ playerImage: "images/player.png"
 //GLOBALS
 var ctx;
 var player;
+var gameObjects = new Map();
 images = {};
 var mouse = {};
 
@@ -44,7 +44,7 @@ function init()
     {  
         inputHandler.keyUp(e.keyCode);
     });
-	player= new Player(CANVAS_WIDTH/2,CANVAS_HEIGHT,50,1);
+    gameObjects.set("player", new Player(CANVAS_WIDTH/2,CANVAS_HEIGHT,50,1));
 }//end init
 
 function track_mouse(e)
@@ -65,7 +65,10 @@ function loop(){
 
 function update()
 {
-    player.update();
+    for (var value of gameObjects.values()) 
+    {
+        value.update();
+    }
 }//END UPDATE
 
 function draw()
@@ -73,7 +76,10 @@ function draw()
     ctx.save();
     ctx.clearRect (0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     drawBackground();
-    player.draw();
+    for (var value of gameObjects.values()) 
+    {
+        value.draw();
+    }
     ctx.restore();
 }//END DRAW
 
