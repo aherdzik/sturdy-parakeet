@@ -1,9 +1,10 @@
 var serverName = "ws://pure-chamber-80976.herokuapp.com";
 //var serverName = "ws://127.0.0.1:5000";
-  
+ 
 function ServerConnection()
 {		
 	this.socket = new WebSocket(serverName);
+    this.current_state = "disconnected";
     // Handle any errors that occur.
     this.socket.onerror = function(error) {
       console.log('WebSocket Error: ' + error);
@@ -12,7 +13,8 @@ function ServerConnection()
 
     // Show a connected message when the WebSocket is opened.
     this.socket.onopen = function(event) {
-        console.log("connected");
+        this.current_state = "connected";
+        this.connected = true;
     };
 
 
@@ -26,7 +28,8 @@ function ServerConnection()
     // Show a disconnected message when the WebSocket is closed.
     this.socket.onclose = function(event) 
     {
-      console.log("disconnected");
+      this.current_state = "disconnected";
+      this.connected = false;
     };
 };
 

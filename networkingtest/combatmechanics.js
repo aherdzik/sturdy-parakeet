@@ -19,6 +19,7 @@ var servConnection = new ServerConnection();
 
 var IMAGE_SOURCES = { 
 playerImage: "images/player.png",
+outsidePlayerImage: "images/outside_player.png",
 squareImage: "images/square.png"
 };
 
@@ -49,11 +50,22 @@ function init()
     });
     gameObjects.set("player", new Player(player_location_x,player_location_y));
     gameObjects.set("square1", new Square(400,400, 100));
+    
 }//end init
 
 function track_mouse(e)
 {
 	//mouse.x mouse.y
+}
+
+function sendName()
+{
+    var sendObj ={};
+    sendObj["messageType"] = "logon";
+    sendObj["name"] = document.getElementById("player_name").value;
+    sendObj["x"] = gameObjects.get("player").x;
+    sendObj["y"] = gameObjects.get("player").y;
+    servConnection.sendMessage(JSON.stringify(sendObj));
 }
 
 function onclick(e)
