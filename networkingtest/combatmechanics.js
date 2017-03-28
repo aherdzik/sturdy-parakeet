@@ -16,6 +16,9 @@ var inputHandler;
 var global_offset_x = 0;
 var global_offset_y = 0;
 var servConnection = new ServerConnection();
+var sentConnectionTry = false;
+var playerName = "";
+
 
 var IMAGE_SOURCES = { 
 playerImage: "images/player.png",
@@ -60,18 +63,21 @@ function track_mouse(e)
 
 function sendName()
 {
-    var sendObj ={};
-    sendObj["messageType"] = "logon";
-    sendObj["name"] = document.getElementById("player_name").value;
-    sendObj["x"] = gameObjects.get("player").x;
-    sendObj["y"] = gameObjects.get("player").y;
-    servConnection.sendMessage(JSON.stringify(sendObj));
+    if(!sentConnectionTry)
+    {
+        var sendObj ={};
+        sendObj["messageType"] = "logon";
+        sendObj["name"] = document.getElementById("player_name").value;
+        playerName = sendObj["name"];
+        sendObj["x"] = gameObjects.get("player").x;
+        sendObj["y"] = gameObjects.get("player").y;
+        servConnection.sendMessage(JSON.stringify(sendObj));
+        sentConnectionTry = true;
+    }
 }
 
 function onclick(e)
 {
-    console.log("test");
-    servConnection.sendMessage("test1");
 }
 
 function loop(){
@@ -89,7 +95,21 @@ function update()
     {
         value.update();
     }
+    if(sentConnectionTry)
+    {
+        updatePositionOnServer();
+    }
 }//END UPDATE
+
+function updatePositionOnServer()
+{
+    var sendObj ={};
+    sendObj["messageType"] = "moveupdate";
+    sendObj["name"] = playerName;
+    sendObj["x"] = gameObjects.get("player").x;
+    sendObj["y"] = gameObjects.get("player").y;
+    servConnection.sendMessage(JSON.stringify(sendObj));
+}
 
 function draw()
 {    
