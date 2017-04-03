@@ -1,4 +1,5 @@
-function InputHandler(xval,yval){
+function InputHandler()
+{
 this.KEYBOARD = {
 		"KEY_LEFT": 65,
 		"KEY_UP": 87,
@@ -15,19 +16,11 @@ this.KEYBOARD = {
 		"KEY_ZERO": 96
 		
 		};
-this.player1input= [];
 	this.keydown = [];
 };
 			
 InputHandler.prototype.keyDown= function(key)
 {
-    if(!this.keydown[key])
-    {
-        if(key==65 || key==87 || key==83 || key==68 || key==81)
-        {
-            this.player1input.push(new InputTimer(key));
-        }
-    }
     this.keydown[key]=true;
 };
 
