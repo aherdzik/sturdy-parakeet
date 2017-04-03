@@ -4,6 +4,7 @@ function Player(xval,yval)
 	this.x = xval;
 	this.y = yval;
 	this.xVel =0;
+    this.rotation = 0;
 	this.yVel = 0;
     this.xVelCap= 300;
     this.yVelCap= 300;
@@ -15,7 +16,18 @@ function Player(xval,yval)
 			
 Player.prototype.draw= function()
 {
-    ctx.drawImage(images["playerImage"],player_location_x-this.radius,player_location_y-this.radius,this.radius*2,this.radius*2);
+    ctx.save();
+
+    // move to the center of the canvas
+    ctx.translate(player_location_x,player_location_y);
+
+    // rotate the canvas to the specified radians
+    ctx.rotate(this.rotation);
+
+    ctx.drawImage(images["playerImage"],this.radius * -1,this.radius * -1,this.radius*2,this.radius*2);  
+    
+    // we’re done with the rotating so restore the unrotated context  
+    ctx.restore();
 };
 
 Player.prototype.update = function()
