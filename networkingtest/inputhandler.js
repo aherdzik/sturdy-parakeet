@@ -14,7 +14,6 @@ this.KEYBOARD = {
 		"KEY_Q": 81,
 		"KEY_SHIFT": 16,
 		"KEY_ZERO": 96
-		
 		};
 	this.keydown = [];
 };

@@ -6,11 +6,9 @@ function Player(xval,yval)
 	this.xVel =0;
     this.rotation = 0;
 	this.yVel = 0;
-    this.xVelCap= 300;
-    this.yVelCap= 300;
-    this.velIncrease= 30;
-	this.xAccel= 0;
-	this.yAccel = 0;
+    this.velCap= 300;
+    this.velIncrease= 10;
+	this.accel=0;
 	this.radius= 50;
 };
 			
@@ -38,36 +36,22 @@ Player.prototype.update = function()
 
 Player.prototype.inputUpdate = function()
 {
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_LEFT])
-    {
-        this.xVel-=(this.velIncrease); 			
-    }
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_RIGHT])
-    {
-        this.xVel+=(this.velIncrease); 
-    }
     if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_UP])
     {
-        this.yVel-=(this.velIncrease);
-    }
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_DOWN])
-    {
-        this.yVel+=(this.velIncrease);	
+        this.xVel+=(this.velIncrease)*-Math.sin(this.rotation);
+        this.yVel+=(this.velIncrease)*Math.cos(this.rotation);
     }
 }
 
 Player.prototype.physicsUpdate = function()
 {
-    this.xVel+=(this.xAccel/FPS);
-    
     //caps X velocity
-    this.xVel = this.xVel > this.xVelCap? this.xVelCap : this.xVel;
-    this.xVel = (this.xVel) < (this.xVelCap * -1)? this.xVelCap* -1 : this.xVel;
+    this.xVel = this.xVel > this.velCap? this.velCap : this.xVel;
+    this.xVel = this.xVel < this.velCap * -1? this.velCap* -1 : this.xVel;
     
     //caps Y velocity
-	this.yVel+=(this.yAccel/FPS);
-    this.yVel = this.yVel > this.yVelCap? this.yVelCap : this.yVel;
-    this.yVel = (this.yVel) < (this.yVelCap * -1)? (this.yVelCap* -1) : this.yVel;
+    this.yVel = this.yVel > this.velCap? this.velCap : this.yVel;
+    this.yVel = this.yVel < this.velCap * -1? this.velCap* -1 : this.yVel;
     
 	this.x+=(this.xVel/FPS);
 	this.y+=(this.yVel/FPS);
