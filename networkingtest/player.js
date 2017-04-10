@@ -36,7 +36,7 @@ Player.prototype.update = function()
 
 Player.prototype.inputUpdate = function()
 {
-    if(inputHandler.keydown[inputHandler.KEYBOARD.KEY_UP])
+    if(mouseDown)
     {
         this.xVel+=(this.velIncrease)*-Math.sin(this.rotation);
         this.yVel+=(this.velIncrease)*Math.cos(this.rotation);

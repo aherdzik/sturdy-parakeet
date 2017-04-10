@@ -18,6 +18,7 @@ var global_offset_y = 0;
 var servConnection = new ServerConnection();
 var sentConnectionTry = false;
 var playerName = "";
+var mouseDown = false;
 
 
 var IMAGE_SOURCES = { 
@@ -39,7 +40,8 @@ function init()
 	canvasElement.height = CANVAS_HEIGHT;
 	ctx=canvasElement.getContext("2d");	
 	ctx.lineWidth=5;
-	canvasElement.addEventListener('click', onclick, false);
+	canvasElement.addEventListener('mousedown', onmousedown, false);
+    canvasElement.addEventListener('mouseup', onmouseup, false);
 	inputHandler= new InputHandler();
 	setInterval(loop, 1000/FPS);
 	canvasElement.addEventListener('mousemove', track_mouse, false);
@@ -81,8 +83,14 @@ function sendName()
     }
 }
 
-function onclick(e)
+function onmousedown(e)
 {
+    mouseDown =true;
+}
+
+function onmouseup(e)
+{
+    mouseDown = false;
 }
 
 function loop(){
