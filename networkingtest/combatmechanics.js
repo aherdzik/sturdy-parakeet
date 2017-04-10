@@ -75,6 +75,7 @@ function sendName()
         playerName = sendObj["name"];
         sendObj["x"] = gameObjects.get("player").x;
         sendObj["y"] = gameObjects.get("player").y;
+        sendObj["rotation"] = gameObjects.get("player").rotation;
         servConnection.sendMessage(JSON.stringify(sendObj));
         sentConnectionTry = true;
     }
@@ -112,6 +113,7 @@ function updatePositionOnServer()
     sendObj["name"] = playerName;
     sendObj["x"] = gameObjects.get("player").x;
     sendObj["y"] = gameObjects.get("player").y;
+    sendObj["rotation"] = gameObjects.get("player").rotation;
     servConnection.sendMessage(JSON.stringify(sendObj));
 }
 
@@ -157,29 +159,4 @@ function loadImages(){
             }
         }
 	}
-}
-
-function rotate(x,y,sin,cos,reverse)
-{
-	var result = new Point(0,0);
-	if(reverse)
-	{
-		result.x = (x * cos) + (y * sin);
-		result.y = (y * cos) - (x * sin);
-	}
-	else
-	{
-		result.x = (x * cos) - (y * sin);
-		result.y = (y * cos) + (x * sin);
-	}
-	
-	if(result.x<0.001 && result.x>-0.001)
-    {
-		result.x=0;
-	}
-	if(result.y<0.001 && result.y>-0.001)
-    {
-		result.y=0;
-	}
-	return result;
 }

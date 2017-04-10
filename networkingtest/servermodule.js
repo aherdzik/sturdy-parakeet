@@ -30,12 +30,13 @@ function ServerConnection()
         {
             if(!gameObjects.has(entry["name"]) && entry["name"] != playerName)
             {
-                gameObjects.set(entry["name"], new NetworkedPlayer(entry["x"],entry["y"]));
+                gameObjects.set(entry["name"], new NetworkedPlayer(entry["x"],entry["y"], entry["rotation"]));
             }
             else if(gameObjects.has(entry["name"]))
             {
                 gameObjects.get(entry["name"])["x"] = entry["x"];
                 gameObjects.get(entry["name"])["y"] = entry["y"];
+                gameObjects.get(entry["name"])["rotation"] = entry["rotation"];
             }
         });
         break;
