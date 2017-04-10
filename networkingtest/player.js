@@ -7,7 +7,7 @@ function Player(xval,yval)
     this.rotation = 0;
 	this.yVel = 0;
     this.velCap= 300;
-    this.velIncrease= 10;
+    this.velIncrease= 30;
 	this.accel=0;
 	this.radius= 50;
 };
@@ -45,13 +45,17 @@ Player.prototype.inputUpdate = function()
 
 Player.prototype.physicsUpdate = function()
 {
-    //caps X velocity
-    this.xVel = this.xVel > this.velCap? this.velCap : this.xVel;
-    this.xVel = this.xVel < this.velCap * -1? this.velCap* -1 : this.xVel;
+    
+    var currentTan = Math.atan2(this.xVel, this.yVel) * -1;
+    var xVelCap = Math.abs(this.velCap *-Math.sin(currentTan));
+    var yVelCap = Math.abs(this.velCap *Math.cos(currentTan));
+    
+    this.xVel = this.xVel > xVelCap? xVelCap : this.xVel;
+    this.xVel = this.xVel < xVelCap * -1? xVelCap* -1 : this.xVel;
     
     //caps Y velocity
-    this.yVel = this.yVel > this.velCap? this.velCap : this.yVel;
-    this.yVel = this.yVel < this.velCap * -1? this.velCap* -1 : this.yVel;
+    this.yVel = this.yVel > yVelCap? yVelCap : this.yVel;
+    this.yVel = this.yVel < yVelCap * -1? yVelCap* -1 : this.yVel;
     
 	this.x+=(this.xVel/FPS);
 	this.y+=(this.yVel/FPS);

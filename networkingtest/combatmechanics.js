@@ -64,7 +64,6 @@ function track_mouse(e)
     mouse.y = e.clientY;
     var currentTan = Math.atan2(mouse.x-player_location_x, mouse.y-player_location_y) * -1;
     gameObjects.get("player").rotation= currentTan;
-    
 }
 
 function sendName()
